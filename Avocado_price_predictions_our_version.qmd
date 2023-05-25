@@ -1,0 +1,21 @@
+---
+title: "Avocado Price Prediction"
+format: revealjs
+editor: visual
+---
+
+## Translation from Python to R
+
+The analysis has been written in Python language and original code can be found in file ***translated_code_with_old_data\\avocado-price-prediction.ipynb***. 
+
+The translation can be found in ***translated_code_with_old_data\\avocado.R***.
+
+They both use data specified in Kaggle article and the new code reproduces the same results.
+
+## Results using original data
+
+## Results using updated data
+
+```{r}
+# load()
+```
