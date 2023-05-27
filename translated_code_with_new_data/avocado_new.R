@@ -9,7 +9,8 @@ library(randomForest)
 # Setting data path, loading the data and changing the format to data frame
 data_path <- "translated_code_with_new_data/"            # type yours
 avocado <- read.csv(paste0(data_path, "avocado_new.csv"))
-avocado <-as.data.frame(avocado)
+avocado <-as.data.frame(avocado) %>% 
+    filter(date > as.Date("2018-03-25"))
 head(avocado)
 
 # Describing the data set
