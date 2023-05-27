@@ -9,4 +9,4 @@ The task specification:
 
 3. Update the data.
 
-4. Discuss the findings, potential problems, inconsistencies and conclusions.
+4. Discuss the findings and conclusions.

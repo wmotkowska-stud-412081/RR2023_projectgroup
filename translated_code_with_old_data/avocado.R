@@ -7,7 +7,7 @@ library(stats)
 library(randomForest)
 
 # Setting data path, loading the data and changing the format to data frame
-data_path <- "C:\\Users\\isupe\\OneDrive\\Pulpit\\"            # type yours
+data_path <- "translated_code_with_old_data/"            # type yours
 avocado <- read.csv(paste0(data_path, "avocado.csv"))
 avocado <-as.data.frame(avocado)
 head(avocado)
@@ -38,7 +38,8 @@ heatmap(correlation, main = "Correlation Heatmap")
 
 # Dropping two created columns, as they will not be needed in plots
 avocado <- avocado[, -14:-15]
-
+avocado_old <- avocado
+save(avocado_old, file = paste0(data_path, "avocado_old.Rdata"))
 ######################################################
 # Data Analysis
 

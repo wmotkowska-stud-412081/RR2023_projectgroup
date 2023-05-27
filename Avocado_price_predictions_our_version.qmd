@@ -4,18 +4,116 @@ format: revealjs
 editor: visual
 ---
 
-## Translation from Python to R
+## Description of the project
 
-The analysis has been written in Python language and original code can be found in file ***translated_code_with_old_data\\avocado-price-prediction.ipynb***. 
+::: {style="font-size:30px"}
 
-The translation can be found in ***translated_code_with_old_data\\avocado.R***.
+For our project we took an [avocado price analysis from Kaggle](https://www.kaggle.com/code/anitha136/avocado-price-prediction).
 
-They both use data specified in Kaggle article and the new code reproduces the same results.
+The analysis has been written in Python language and original code can be found in file ***translated_code_with_old_data/avocado-price-prediction.ipynb***.
 
-## Results using original data
+The translation to R can be found in ***translated_code_with_old_data/avocado.R***.
 
-## Results using updated data
+They both use data specified in article and the new code reproduces the same results.
+
+Later on we used the new code to update [the data with 2019-2020 values](https://www.kaggle.com/datasets/timmate/avocado-prices-2020). In the presentation we will explore the differences between old and new results.
+
+:::
 
 ```{r}
-# load()
+library(ggplot2)
+library(gridExtra)
+library(sjmisc)
+library(knitr)
+library(tidyverse)
+load("translated_code_with_old_data/avocado_old.Rdata")
+load("translated_code_with_new_data/avocado_new.Rdata")
+```
+
+## The timeline
+
+```{r include = FALSE}
+date_range_old <- paste(min(avocado_old$Date), "to", max(avocado_old$Date))
+date_range_old2 <- max(avocado_old$Date) - min(avocado_old$Date)
+
+date_range_new <- paste(min(avocado_new$Date), "to", max(avocado_new$Date))
+date_range_new2 <- max(avocado_new$Date) - min(avocado_new$Date)
+
+```
+
+::: {style="font-size:30px"}
+
+Date range in original dataset is `r date_range_old` . Available `r date_range_old2` days.
+
+Date range in updated dataset is `r date_range_new` . Available `r date_range_new2` days.
+
+:::
+
+```{r}
+price_data <- bind_rows(avocado_new %>% 
+    select(Date, AveragePrice) %>% 
+    mutate(dataset = "avocado_new"),
+    avocado_old %>% 
+    select(Date, AveragePrice) %>% 
+    mutate(dataset = "avocado_old")) %>% 
+    group_by(Date, dataset) %>% 
+    summarise_all(mean) %>% 
+    ungroup()
+
+ggplot(price_data, aes(x = Date, y = AveragePrice, color=dataset)) + 
+  geom_line()
+```
+
+## Spread of Average Price in the data
+
+::: {style="font-size:30px"}
+
+Old dataset
+
+```{r}
+summary(avocado_old[,"AveragePrice"])
+```
+
+New dataset
+
+```{r}
+summary(avocado_new[,"AveragePrice"])
+```
+
+:::
+
+```{r}
+p1 <- ggplot(avocado_old, aes(x = AveragePrice)) +
+  geom_density(fill = "blue", alpha = 0.5) +
+  labs(x = "Distribution of Average price in old dataset", y="Density")
+
+p2 <- ggplot(avocado_new, aes(x = AveragePrice)) +
+  geom_density(fill = "green", alpha = 0.5) +
+  labs(x = "Distribution of Average price in new dataset", y="Density")
+
+grid.arrange(p1, p2, nrow = 1)
+```
+
+## Type of avocado vs Average Price
+
+Average price of organic avocados drops when we compare 2015-2018 to 2018-2020.
+
+```{r}
+p3 <- ggplot(avocado_old, aes(x = type_organic, y = AveragePrice, color=type_organic)) + 
+  geom_boxplot()+
+  scale_y_continuous(limits = c(0,2.5))+
+  labs(title="Average Price of one Avocado by type",
+       x="Type",y="Average Price",
+       color="Type")+ 
+  theme_minimal()
+
+p4 <- ggplot(avocado_new, aes(x = Type_organic, y = AveragePrice, color=Type_organic)) + 
+  geom_boxplot()+
+  scale_y_continuous(limits = c(0,2.5))+
+  labs(title="Average Price of one Avocado by type",
+       x="Type",y="Average Price",
+       color="Type")+ 
+  theme_minimal()
+
+grid.arrange(p3, p4, nrow = 1)
 ```

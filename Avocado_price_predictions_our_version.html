@@ -329,21 +329,52 @@
 </div>
 
 </section>
-<section id="translation-from-python-to-r" class="slide level2">
-<h2>Translation from Python to R</h2>
-<p>The analysis has been written in Python language and original code can be found in file <strong><em>translated_code_with_old_data\avocado-price-prediction.ipynb</em></strong>.</p>
-<p>The translation can be found in <strong><em>translated_code_with_old_data\avocado.R</em></strong>.</p>
-<p>They both use data specified in Kaggle article and the new code reproduces the same results.</p>
-</section>
-<section id="results-using-original-data" class="slide level2">
-<h2>Results using original data</h2>
-</section>
-<section id="results-using-updated-data" class="slide level2">
-<h2>Results using updated data</h2>
+<section id="description-of-the-project" class="slide level2">
+<h2>Description of the project</h2>
+<div style="font-size:30px">
+<p>For our project we took an <a href="https://www.kaggle.com/code/anitha136/avocado-price-prediction">avocado price analysis from Kaggle</a>.</p>
+<p>The analysis has been written in Python language and original code can be found in file <strong><em>translated_code_with_old_data/avocado-price-prediction.ipynb</em></strong>.</p>
+<p>The translation to R can be found in <strong><em>translated_code_with_old_data/avocado.R</em></strong>.</p>
+<p>They both use data specified in article and the new code reproduces the same results.</p>
+<p>Later on we used the new code to update <a href="https://www.kaggle.com/datasets/timmate/avocado-prices-2020">the data with 2019-2020 values</a>. In the presentation we will explore the differences between old and new results.</p>
+</div>
 <div class="cell">
 
 </div>
-<div class="footer footer-default">
+</section>
+<section id="the-timeline" class="slide level2">
+<h2>The timeline</h2>
+<div style="font-size:30px">
+<p>Date range in original dataset is 2015-01-04 to 2018-03-25 . Available 1176 days.</p>
+<p>Date range in updated dataset is 2018-03-25 to 2020-11-29 . Available 980 days.</p>
+</div>
+
+<img data-src="Avocado_price_predictions_our_version_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
+<section id="spread-of-average-price-in-the-data" class="slide level2">
+<h2>Spread of Average Price in the data</h2>
+<div style="font-size:30px">
+<p>Old dataset</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  0.440   1.100   1.370   1.406   1.660   3.250 </code></pre>
+</div>
+</div>
+<p>New dataset</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  0.500   1.090   1.320   1.348   1.560   2.780 </code></pre>
+</div>
+</div>
+</div>
+
+<img data-src="Avocado_price_predictions_our_version_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section>
+<section id="type-of-avocado-vs-average-price" class="slide level2">
+<h2>Type of avocado vs Average Price</h2>
+<p>Average price of organic avocados drops when we compare 2015-2018 to 2018-2020.</p>
+
+<img data-src="Avocado_price_predictions_our_version_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch"><div class="footer footer-default">
 
 </div>
 </section>

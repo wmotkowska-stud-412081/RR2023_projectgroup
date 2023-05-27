@@ -7,7 +7,7 @@ library(stats)
 library(randomForest)
 
 # Setting data path, loading the data and changing the format to data frame
-data_path <- "C:\\Users\\isupe\\OneDrive\\Pulpit\\"            # type yours
+data_path <- "translated_code_with_new_data/"            # type yours
 avocado <- read.csv(paste0(data_path, "avocado_new.csv"))
 avocado <-as.data.frame(avocado)
 head(avocado)
@@ -36,6 +36,8 @@ heatmap(correlation, main = "Correlation Heatmap")
 
 # Dropping two created columns, as they will not be needed in plots
 avocado <- avocado[, -14:-15]
+avocado_new <- avocado
+save(avocado_new, file = paste0(data_path, "avocado_new.Rdata"))
 
 ######################################################
 # Data Analysis
@@ -269,3 +271,4 @@ SS_Total <- sum((y_test - mean(y_test))^2)
 r_squared <- 1 - (SS_Residual / SS_Total)
 adjusted_r_squared <- 1 - (1 - r_squared) * (length(y_test) - 1) / (length(y_test) - dim(x_test)[2] - 1)
 cat("R-squared for test data", r_squared, "and Adjusted R-squared for test data", adjusted_r_squared, "\n")
+
